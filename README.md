@@ -4,4 +4,3 @@
 
 **Click the image above to watch the 6-axis arm control demo**
 
-6-Axis Robotic Arm performing autonomous manipulation with MoveIt2 motion planning
