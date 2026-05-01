@@ -14,7 +14,7 @@
 
 ## 🎥 Demo Video
 
-
+https://github.com/user-attachments/assets/f15db356-c464-44b9-91bf-9ad13584e52c
 
 [![6-Axis Arm Demo](https://img.youtube.com/vi/Jnb3DlE6N3Q/0.jpg)](https://www.youtube.com/watch?v=Jnb3DlE6N3Q)
 
