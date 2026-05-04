@@ -12,3 +12,5 @@
     <xacro:my_robot_ros2_control name="FakeSystem" initial_positions_file="$(arg initial_positions_file)"/>
 
 </robot>
+
+

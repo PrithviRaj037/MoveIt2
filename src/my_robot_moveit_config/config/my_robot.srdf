@@ -34,12 +34,20 @@
         <joint name="joint6" value="0"/>
     </group_state>
     <group_state name="pose_1" group="arm">
-        <joint name="joint1" value="1.197"/>
-        <joint name="joint2" value="0"/>
-        <joint name="joint3" value="0.5801"/>
-        <joint name="joint4" value="0.7113"/>
-        <joint name="joint5" value="0.1648"/>
-        <joint name="joint6" value="-0.2256"/>
+        <joint name="joint1" value="1.1705"/>
+        <joint name="joint2" value="1.1686"/>
+        <joint name="joint3" value="0.9172"/>
+        <joint name="joint4" value="1.2449"/>
+        <joint name="joint5" value="0.994"/>
+        <joint name="joint6" value="1.0596"/>
+    </group_state>
+     <group_state name="pose_2" group="arm">
+        <joint name="joint1" value="-1.5421"/>
+        <joint name="joint2" value="1.5828"/>
+        <joint name="joint3" value="0.503"/>
+        <joint name="joint4" value="-0.2787"/>
+        <joint name="joint5" value="1.3285"/>
+        <joint name="joint6" value="-1.7659"/>
     </group_state>
     <group_state name="gripper_open" group="gripper">
         <joint name="gripper_left_finger_joint" value="0"/>

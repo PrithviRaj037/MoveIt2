@@ -13,9 +13,21 @@
                value="$(command 'xacro $(var urdf_path)')"/>
     </node>
 
-    <!-- ros2_control -->
+<!-- Gazebo Simulation -->
+     <node pkg="robot_state_publisher" exec="robot_state_publisher">
+        <param name="robot_description" 
+               value="$(command 'xacro $(var urdf_path)')"/>
+    </node>
+    <include file="$(find-pkg-share ros_gz_sim)/launch/gz_sim.launch.py">
+        <arg name="gz_args" value="empty.sdf -r"/>
+    </include>
+    <node pkg="ros_gz_sim" exec="create" 
+          args="-topic robot_description"/> 
+
+
+    <!--ros2_control-->
     <node pkg="controller_manager" exec="ros2_control_node">
-        <param from="$(find-pkg-share my_robot_moveit_config)/config/ros2_controllers.yaml"/>
+        <param from="$(find-pkg-share my_robot_bringup)/config/ros2_controllers.yaml"/>
     </node>
 
     <!-- Controllers -->

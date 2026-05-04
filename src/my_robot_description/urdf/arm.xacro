@@ -1,6 +1,14 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+    <link name="world"/>
+
+    <joint name="world_joint" type="fixed">
+        <parent link="world"/>
+        <child link="base_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
     <link name="base_link">
         <visual>
             <geometry>
@@ -9,6 +17,10 @@
             <origin xyz="0 0 0.05" rpy="0 0 0" />
             <material name="grey" />
         </visual>
+ 
+       <xacro:box_inertia m="5.0" x="0.4" y="0.4" z="0.1"
+                           o_xyz="0 0 0.05" o_rpy="0 0 0" />
+
         <collision>
             <geometry>
                 <box size="0.4 0.4 0.1" />
@@ -25,12 +37,16 @@
             <origin xyz="0 0 0.25" rpy="0 0 0" />
             <material name="blue" />
         </visual>
+
         <collision>
             <geometry>
                 <box size="0.2 0.2 0.5"/>
             </geometry>
             <origin xyz="0 0 0.25" rpy="0 0 0" />
         </collision>
+        
+       <xacro:box_inertia m="5.0" x="0.2" y="0.2" z="0.5"
+                           o_xyz="0 0 0.25" o_rpy="0 0 0" />
     </link>
 
     <link name="arm_link">
@@ -47,6 +63,10 @@
             </geometry>
             <origin xyz="0 0 0.3" rpy="0 0 0" />
         </collision>
+        
+        <xacro:box_inertia m="5.0" x="0.1" y="0.1" z="0.6"
+                           o_xyz="0 0 0.3" o_rpy="0 0 0" />
+
     </link>
 
     <link name="elbow_link">
@@ -63,6 +83,10 @@
             </geometry>
             <origin xyz="0 0 0.05" rpy="0 0 0" />
         </collision>
+    
+          <xacro:box_inertia m="5.0" x="0.1" y="0.1" z="0.1"
+                           o_xyz="0 0 0.05" o_rpy="0 0 0" />
+
     </link>
 
     <link name="forearm_link">
@@ -79,6 +103,11 @@
             </geometry>
             <origin xyz="0 0 0.25" rpy="0 0 0" />
         </collision>
+      
+        
+        <xacro:box_inertia m="5.0" x="0.1" y="0.1" z="0.5"
+                           o_xyz="0 0 0.25" o_rpy="0 0 0" />
+
     </link>
 
     <link name="wrist_link">
@@ -95,6 +124,10 @@
             </geometry>
             <origin xyz="0 0 0.025" rpy="0 0 0" />
         </collision>
+
+        
+          <xacro:box_inertia m="5.0" x="0.1" y="0.1" z="0.05"
+                           o_xyz="0 0 0.05" o_rpy="0 0 0" />
     </link>
 
     <link name="hand_link">
@@ -111,9 +144,15 @@
             </geometry>
             <origin xyz="0 0 0.01" rpy="0 0 0" />
         </collision>
+
+        
+        <xacro:box_inertia m="5.0" x="0.1" y="0.1" z="0.02"
+                           o_xyz="0 0 0.01" o_rpy="0 0 0" />
     </link>
 
     <link name="tool_link" />
+
+    
 
     <joint name="joint1" type="revolute">
         <parent link="base_link" />
@@ -169,4 +208,110 @@
         <origin xyz="0 0 0.02" rpy="0 0 0" />
     </joint>
 
+    
 </robot>
+
+    <!-- ==================== GAZEBO PLUGINS ==================== -->
+
+    <!-- 1. GAZEBO PHYSICS & CONTACT PROPERTIES -->
+    
+    <!-- <gazebo>
+        <physics name="default_physics" default="true" type="ode">
+            <max_step_size>0.001</max_step_size>
+            <real_time_factor>1.0</real_time_factor>
+            <real_time_update_rate>1000</real_time_update_rate>
+            <gravity>0 0 -9.81</gravity>
+            <ode>
+                <solver>
+                    <type>quick</type>
+                    <iters>150</iters>
+                    <precon_iters>0</precon_iters>
+                    <sor>1.400000</sor>
+                    <use_dynamic_moi_rescaling>0</use_dynamic_moi_rescaling>
+                </solver>
+                <constraints>
+                    <cfm>0.00000</cfm>
+                    <erp>0.20000</erp>
+                    <contact_max_correcting_vel>2000.00000</contact_max_correcting_vel>
+                    <contact_surface_layer>0.01000</contact_surface_layer>
+                </constraints>
+            </ode>
+        </physics>
+    </gazebo>
+
+    <!- 2. LINK SURFACE PROPERTIES (Friction, Bounce) -->
+    <!-- <gazebo reference="base_link">
+        <material>Gazebo/Grey</material>
+        <mu1>0.8</mu1>
+        <mu2>0.8</mu2>
+        <kp>1000000.0</kp>
+        <kd>1.0</kd>
+    </gazebo>
+
+    <gazebo reference="shoulder_link">
+        <material>Gazebo/Blue</material>
+        <mu1>0.8</mu1>
+        <mu2>0.8</mu2>
+    </gazebo>
+
+    <gazebo reference="arm_link">
+        <material>Gazebo/Grey</material>
+        <mu1>0.8</mu1>
+        <mu2>0.8</mu2>
+    </gazebo>
+
+    <gazebo reference="elbow_link">
+        <material>Gazebo/Blue</material>
+        <mu1>0.8</mu1>
+        <mu2>0.8</mu2>
+    </gazebo>
+
+    <gazebo reference="forearm_link">
+        <material>Gazebo/Grey</material>
+        <mu1>0.8</mu1>
+        <mu2>0.8</mu2>
+    </gazebo>
+
+    <gazebo reference="wrist_link">
+        <material>Gazebo/Blue</material>
+        <mu1>0.8</mu1>
+        <mu2>0.8</mu2>
+    </gazebo>
+
+    <gazebo reference="hand_link">
+        <material>Gazebo/Grey</material>
+        <mu1>0.8</mu1>
+        <mu2>0.8</mu2>
+    </gazebo>
+
+    <!- 3. JOINT FRICTION & DAMPING -->
+    <!-- <gazebo reference="joint1">
+        <implicitSpringDamper>1</implicitSpringDamper>
+        <friction>0.0</friction>
+    </gazebo>
+
+    <gazebo reference="joint2">
+        <implicitSpringDamper>1</implicitSpringDamper>
+        <friction>0.0</friction>
+    </gazebo>
+
+    <gazebo reference="joint3">
+        <implicitSpringDamper>1</implicitSpringDamper>
+        <friction>0.0</friction>
+    </gazebo>
+
+    <gazebo reference="joint4">
+        <implicitSpringDamper>1</implicitSpringDamper>
+        <friction>0.0</friction>
+    </gazebo>
+
+    <gazebo reference="joint5">
+        <implicitSpringDamper>1</implicitSpringDamper>
+        <friction>0.0</friction>
+    </gazebo>
+
+    <gazebo reference="joint6">
+        <implicitSpringDamper>1</implicitSpringDamper>
+        <friction>0.0</friction>
+    </gazebo> -->
+ <!-- --> 

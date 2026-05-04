@@ -4,7 +4,17 @@
     <xacro:include filename="common_properties.xacro"/>
     <xacro:include filename="arm.xacro"/>  
     <xacro:include filename="gripper.xacro"/>
-    <xacro:include filename="my_robot_ros2_control.xacro"/>
+    <xacro:include filename="my_robot.ros2_control.xacro"/>
+
+
+  <!-- THIS LINE IS CRITICAL -->
+    <!-- <gazebo>
+        <plugin filename="gz_ros2_control-system"
+                name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+        <parameters>$(find my_robot_bringup)/config/ros2_controllers.yaml</parameters>        
+        </plugin>
+    </gazebo> -->
+
 
     <joint name="base_to_arm_joint" type="fixed">
         <parent link="tool_link"/>
