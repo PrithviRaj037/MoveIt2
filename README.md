@@ -1,22 +1,60 @@
-## 🔧 Project Status
+# ROS 2 MoveIt2 Robotic Arm Simulation with Gazebo
+## Overview
+The goal of this project is to build a complete simulated robotic arm pipeline using ROS 2.
 
-### ✅ Completed
-- **6-Axis Robotic Arm Design** - Designed from scratch with modular URDF/Xacro descriptions
-- **Kinematic Chain** - Complete arm structure (shoulder → arm → elbow → forearm → wrist → hand)
-- **Parallel-Jaw Gripper** - Integrated gripper with dual-finger actuation
-- **ros2_control Integration** - Real-time joint and gripper control framework
-- **RViz2 Visualization** - Complete TF broadcasting and 3D visualization
-- **Demo Video** - Proof of concept available on YouTube
+The robot is modeled using **URDF/Xacro**, controlled using **ros2_control**, planned using **MoveIt 2**, visualized in **RViz**, and simulated in **Gazebo**.
 
-### 🚧 In Progress
-- **MoveIt2 Motion Planning** - Advanced trajectory planning and collision avoidance (coming soon)
-- **Advanced Manipulation Strategies** - Object grasping and placement algorithms
+Current motion sequence:
+1. Open gripper
+2. Move end-effector to pick pose
+3. Close parallel gripper
+4. Lift the end-effector
+5. Move to place location
+6. Open gripper to release
 
-## 🎥 Demo Video
+## Demo
+https://github.com/user-attachments/assets/52f3dec3-890c-4108-a1e8-1225c53d57d9
 
-https://github.com/user-attachments/assets/f15db356-c464-44b9-91bf-9ad13584e52c
+## System Architecture
+URDF/Xacro → Robot Model → robot_state_publisher → ros2_control + Gazebo Hardware Interface → Joint Trajectory Controllers → MoveIt 2 Planning Pipeline → C++ MoveGroupInterface Commander → Gazebo Simulation + RViz Visualization
+## Features
+1. 6-axis robotic arm simulation
+2. Parallel gripper integration
+3. Modular URDF/Xacro robot description
+4. MoveIt 2 planning groups for arm and gripper
+5. C++ motion execution using MoveGroupInterface
+6. Gazebo simulation environment
+7. RViz visualization and motion planning
+8. ros2_control controller setup
+9. Arm trajectory controller
+10. Gripper trajectory controller
+11. Basic pick, close, lift, place, and release sequence
+## Project Structure
+MoveIt2
 
-[![6-Axis Arm Demo](https://img.youtube.com/vi/Jnb3DlE6N3Q/0.jpg)](https://www.youtube.com/watch?v=Jnb3DlE6N3Q)
+## Requirements
+This project was developed with:
 
-**Click the image above to watch the 6-axis arm control demo**
+1. Ubuntu 24.04
+2. ROS 2 Jazzy
+3. Gazebo Harmonic
+4. MoveIt 2
+5. RViz2
+6. ros2_control
+7. C++
+8. colcon build system
+
+Required ROS 2 packages include:
+1. sudo apt install ros-jazzy-moveit
+2. sudo apt install ros-jazzy-ros2-control
+3. sudo apt install ros-jazzy-ros2-controllers
+4. sudo apt install ros-jazzy-gz-ros2-control
+5. sudo apt install ros-jazzy-ros-gz
+## Build Instructions
+## Run Instructions
+## Challenges Solved
+## Future Work
+
+
+
 
