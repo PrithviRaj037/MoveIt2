@@ -5,6 +5,7 @@
     <xacro:include filename="arm.xacro"/>  
     <xacro:include filename="gripper.xacro"/>
     <xacro:include filename="my_robot.ros2_control.xacro"/>
+    <xacro:include filename="6axis_robotic_gazebo.xacro"/>
 
 
   <!-- THIS LINE IS CRITICAL -->

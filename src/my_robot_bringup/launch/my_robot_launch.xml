@@ -1,8 +1,11 @@
 <launch>
-
+    <set_parameter name="use_sim_time" value="true"/>
     <!-- Paths -->
     <let name="urdf_path"
          value="$(find-pkg-share my_robot_description)/urdf/my_robot_urdf.xacro"/>
+<!-- New line -->
+    <let name="gazebo_config_path" 
+         value="$(find-pkg-share my_robot_bringup)/config/gazebo_bridge.yaml"/>     
 
     <let name="rviz_config_path"
          value="$(find-pkg-share my_robot_bringup)/config/my_robot_moveit.rviz"/>
@@ -14,32 +17,45 @@
     </node>
 
 <!-- Gazebo Simulation -->
-     <node pkg="robot_state_publisher" exec="robot_state_publisher">
+     <!-- <node pkg="robot_state_publisher" exec="robot_state_publisher">
         <param name="robot_description" 
-               value="$(command 'xacro $(var urdf_path)')"/>
-    </node>
+               value="$(command 'xacro $(var urdf_path)')"/> -->
+    <!-- </node> -->
     <include file="$(find-pkg-share ros_gz_sim)/launch/gz_sim.launch.py">
-        <arg name="gz_args" value="empty.sdf -r"/>
+        <arg name="gz_args" value="$(find-pkg-share my_robot_bringup)/worlds/test_world.sdf -r"/>
+        
+       
     </include>
     <node pkg="ros_gz_sim" exec="create" 
           args="-topic robot_description"/> 
+    
+    <!-- New line -->
+    <node pkg="ros_gz_bridge" exec="parameter_bridge">
+        <param name="config_file" value="$(var gazebo_config_path)"/>
+    </node>      
 
 
     <!--ros2_control-->
-    <node pkg="controller_manager" exec="ros2_control_node">
+    <!-- <node pkg="controller_manager" exec="ros2_control_node">
         <param from="$(find-pkg-share my_robot_bringup)/config/ros2_controllers.yaml"/>
-    </node>
+    </node> -->
 
     <!-- Controllers -->
-    <node pkg="controller_manager" exec="spawner" args="joint_state_broadcaster"/>
-    <node pkg="controller_manager" exec="spawner" args="arm_controller"/>
-    <node pkg="controller_manager" exec="spawner" args="gripper_controller"/>
+    <timer period="5.0">  
+        <node pkg="controller_manager" exec="spawner" args="joint_state_broadcaster"/>
+        <node pkg="controller_manager" exec="spawner" args="arm_controller"/>
+        <node pkg="controller_manager" exec="spawner" args="gripper_controller"/>
+    </timer>    
 
     <!-- MoveIt -->
     <include file="$(find-pkg-share my_robot_moveit_config)/launch/move_group.launch.py"/>
 
+    <include file="$(find-pkg-share my_robot_moveit_config)/launch/moveit_rviz.launch.py"/>
+
+
     <!-- RViz -->
-    <node pkg="rviz2" exec="rviz2" output="screen"
-          args="-d $(var rviz_config_path)"/>
+    <!--node pkg="rviz2" exec="rviz2" output="screen"
+          args="-d $(var rviz_config_path)"/-->
+   
 
 </launch>

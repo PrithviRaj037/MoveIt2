@@ -150,7 +150,30 @@
                            o_xyz="0 0 0.01" o_rpy="0 0 0" />
     </link>
 
-    <link name="tool_link" />
+    <link name="camera_link">
+        <visual>
+            <geometry>
+                <box size="0.1 0.1 0.02"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <material name="grey"/>
+        </visual> 
+
+        <collision>
+            <geometry>
+                <box size="0.1 0.1 0.02"/>
+            </geometry>
+             <origin xyz="0 0 0" rpy="0 0 0"/>
+        </collision>
+        <xacro:box_inertia m="0.1" x="0.1" y="0.1" z="0.02"
+                           o_xyz="0 0 0" o_rpy="0 0 0" />
+    </link>
+    <link name="tool_link" >
+        <inertial>
+            <mass value="0.01"/>
+            <inertia ixx="0.000001" ixy="0.0" ixz="0.0" iyy="0.000001" iyz="0.0" izz="0.000001"/>
+        </inertial>
+    </link>    
 
     
 
@@ -208,110 +231,51 @@
         <origin xyz="0 0 0.02" rpy="0 0 0" />
     </joint>
 
+    <joint name="world_to_camera_joint" type="fixed">
+        <parent link="world"/>
+        <child link="camera_link"/>
+        <origin xyz="0.5 0.5 2.0" rpy="0 1.57 0"/>
+    </joint>
+
+    <joint name="camera_optical_joint" type="fixed">
+        <parent link="camera_link"/>
+        <child link="camera_link_optical"/>
+        <origin xyz="0 0 0" rpy="0 1.57 0"/>
+    </joint>
+    <link name="camera_link_optical">
+        <inertial>
+            <mass value="0.001"/>
+            <inertia ixx="0.0000001" ixy="0.0" ixz="0.0" iyy="0.0000001" iyz="0.0" izz="0.0000001"/>
+        </inertial>
+    </link>     
+
+    
+    <gazebo reference="camera_link">
+            <sensor name="camera" type="camera">
+                <camera>
+                    <horizontal_fov>1.047</horizontal_fov>
+                    <image>
+                        <width>640</width>
+                        <height>480</height>
+                        <format>R8G8B8</format>
+                    </image>
+                    <clip>
+                        <near>0.1</near>
+                        <far>20</far>
+                    </clip>
+                <optical_frame_id>camera_link_optical</optical_frame_id>
+                <camera_info_topic>camera/camera_info</camera_info_topic>
+            </camera>
+            <always_on>1</always_on>
+            <update_rate>20</update_rate>
+            <visualize>true</visualize>
+            <topic>camera/image_raw</topic>            
+        </sensor>
+    </gazebo>
+   
+
+
     
 </robot>
 
-    <!-- ==================== GAZEBO PLUGINS ==================== -->
-
-    <!-- 1. GAZEBO PHYSICS & CONTACT PROPERTIES -->
-    
-    <!-- <gazebo>
-        <physics name="default_physics" default="true" type="ode">
-            <max_step_size>0.001</max_step_size>
-            <real_time_factor>1.0</real_time_factor>
-            <real_time_update_rate>1000</real_time_update_rate>
-            <gravity>0 0 -9.81</gravity>
-            <ode>
-                <solver>
-                    <type>quick</type>
-                    <iters>150</iters>
-                    <precon_iters>0</precon_iters>
-                    <sor>1.400000</sor>
-                    <use_dynamic_moi_rescaling>0</use_dynamic_moi_rescaling>
-                </solver>
-                <constraints>
-                    <cfm>0.00000</cfm>
-                    <erp>0.20000</erp>
-                    <contact_max_correcting_vel>2000.00000</contact_max_correcting_vel>
-                    <contact_surface_layer>0.01000</contact_surface_layer>
-                </constraints>
-            </ode>
-        </physics>
-    </gazebo>
-
-    <!- 2. LINK SURFACE PROPERTIES (Friction, Bounce) -->
-    <!-- <gazebo reference="base_link">
-        <material>Gazebo/Grey</material>
-        <mu1>0.8</mu1>
-        <mu2>0.8</mu2>
-        <kp>1000000.0</kp>
-        <kd>1.0</kd>
-    </gazebo>
-
-    <gazebo reference="shoulder_link">
-        <material>Gazebo/Blue</material>
-        <mu1>0.8</mu1>
-        <mu2>0.8</mu2>
-    </gazebo>
-
-    <gazebo reference="arm_link">
-        <material>Gazebo/Grey</material>
-        <mu1>0.8</mu1>
-        <mu2>0.8</mu2>
-    </gazebo>
-
-    <gazebo reference="elbow_link">
-        <material>Gazebo/Blue</material>
-        <mu1>0.8</mu1>
-        <mu2>0.8</mu2>
-    </gazebo>
-
-    <gazebo reference="forearm_link">
-        <material>Gazebo/Grey</material>
-        <mu1>0.8</mu1>
-        <mu2>0.8</mu2>
-    </gazebo>
-
-    <gazebo reference="wrist_link">
-        <material>Gazebo/Blue</material>
-        <mu1>0.8</mu1>
-        <mu2>0.8</mu2>
-    </gazebo>
-
-    <gazebo reference="hand_link">
-        <material>Gazebo/Grey</material>
-        <mu1>0.8</mu1>
-        <mu2>0.8</mu2>
-    </gazebo>
-
-    <!- 3. JOINT FRICTION & DAMPING -->
-    <!-- <gazebo reference="joint1">
-        <implicitSpringDamper>1</implicitSpringDamper>
-        <friction>0.0</friction>
-    </gazebo>
-
-    <gazebo reference="joint2">
-        <implicitSpringDamper>1</implicitSpringDamper>
-        <friction>0.0</friction>
-    </gazebo>
-
-    <gazebo reference="joint3">
-        <implicitSpringDamper>1</implicitSpringDamper>
-        <friction>0.0</friction>
-    </gazebo>
-
-    <gazebo reference="joint4">
-        <implicitSpringDamper>1</implicitSpringDamper>
-        <friction>0.0</friction>
-    </gazebo>
-
-    <gazebo reference="joint5">
-        <implicitSpringDamper>1</implicitSpringDamper>
-        <friction>0.0</friction>
-    </gazebo>
-
-    <gazebo reference="joint6">
-        <implicitSpringDamper>1</implicitSpringDamper>
-        <friction>0.0</friction>
-    </gazebo> -->
- <!-- --> 
+   

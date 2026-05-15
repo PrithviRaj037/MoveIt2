@@ -4,7 +4,8 @@
   <ros2_control name="Arm" type="system">
       <hardware>
           <!-- By default, set up controllers for simulation. This won't work on real hardware -->
-          <plugin>mock_components/GenericSystem</plugin>
+          <!-- <plugin>mock_components/GenericSystem</plugin> new line --> 
+          <plugin>gz_ros2_control/GazeboSimSystem</plugin>
       </hardware>
       <joint name="joint1">
           <command_interface name="position"/>
@@ -48,6 +49,13 @@
             <param name="initial_value">0.0</param>
           </state_interface>
       </joint>
+      <joint name="gripper_right_finger_joint">
+          <command_interface name="position"/>
+          <state_interface name="position">
+            <param name="initial_value">0.0</param>
+          </state_interface>
+      </joint>
+
 
   </ros2_control>
 

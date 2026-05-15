@@ -1,0 +1,88 @@
+
+  # # Clock (required for ROS 2 time synchronization)
+  # - ros_topic_name: "/clock"
+  #   gz_topic_name: "/clock"
+  #   ros_type_name: "rosgraph_msgs/msg/Clock"
+  #   gz_type_name: "gz.msgs.Clock"
+  #   direction: GZ_TO_ROS
+
+  # # Joint States (feedback from Gazebo to ROS 2)
+  # - ros_topic_name: "/joint_states"
+  #   gz_topic_name: "/world/empty/model/my_robot/joint_state"
+  #   ros_type_name: "sensor_msgs/msg/JointState"
+  #   gz_type_name: "gz.msgs.Model"
+  #   direction: GZ_TO_ROS
+
+  # # ARM CONTROLLER TRAJECTORY (FOR MoveIt)
+  # - ros_topic_name: "/arm_controller/joint_trajectory"
+  #   gz_topic_name: "/model/my_robot/joint_trajectory"
+  #   ros_type_name: "trajectory_msgs/msg/JointTrajectory"
+  #   gz_type_name: "gz.msgs.Trajectory"
+  #   direction: ROS_TO_GZ
+
+  # # GRIPPER CONTROLLER TRAJECTORY
+  # - ros_topic_name: "/gripper_controller/joint_trajectory"
+  #   gz_topic_name: "/model/my_robot/gripper_trajectory"
+  #   ros_type_name: "trajectory_msgs/msg/JointTrajectory"
+  #   gz_type_name: "gz.msgs.Trajectory"
+  #   direction: ROS_TO_GZ
+
+  # # Joint 1 Commands
+  # - ros_topic_name: "/my_robot/joint1_controller/commands"
+  #   gz_topic_name: "/model/my_robot/joint/joint1/0/cmd_pos"
+  #   ros_type_name: "std_msgs/msg/Float64"
+  #   gz_type_name: "gz.msgs.Double"
+  #   direction: ROS_TO_GZ
+
+  # # Joint 2 Commands
+  # - ros_topic_name: "/my_robot/joint2_controller/commands"
+  #   gz_topic_name: "/model/my_robot/joint/joint2/0/cmd_pos"
+  #   ros_type_name: "std_msgs/msg/Float64"
+  #   gz_type_name: "gz.msgs.Double"
+  #   direction: ROS_TO_GZ
+
+  # # Joint 3 Commands
+  # - ros_topic_name: "/my_robot/joint3_controller/commands"
+  #   gz_topic_name: "/model/my_robot/joint/joint3/0/cmd_pos"
+  #   ros_type_name: "std_msgs/msg/Float64"
+  #   gz_type_name: "gz.msgs.Double"
+  #   direction: ROS_TO_GZ
+
+  # # Joint 4 Commands
+  # - ros_topic_name: "/my_robot/joint4_controller/commands"
+  #   gz_topic_name: "/model/my_robot/joint/joint4/0/cmd_pos"
+  #   ros_type_name: "std_msgs/msg/Float64"
+  #   gz_type_name: "gz.msgs.Double"
+  #   direction: ROS_TO_GZ
+
+  # # Joint 5 Commands
+  # - ros_topic_name: "/my_robot/joint5_controller/commands"
+  #   gz_topic_name: "/model/my_robot/joint/joint5/0/cmd_pos"
+  #   ros_type_name: "std_msgs/msg/Float64"
+  #   gz_type_name: "gz.msgs.Double"
+  #   direction: ROS_TO_GZ
+
+  # # Joint 6 Commands
+  # - ros_topic_name: "/my_robot/joint6_controller/commands"
+  #   gz_topic_name: "/model/my_robot/joint/joint6/0/cmd_pos"
+  #   ros_type_name: "std_msgs/msg/Float64"
+  #   gz_type_name: "gz.msgs.Double"
+  #   direction: ROS_TO_GZ
+
+  - ros_topic_name: "/clock"
+    gz_topic_name: "/clock"
+    ros_type_name: "rosgraph_msgs/msg/Clock"
+    gz_type_name: "gz.msgs.Clock"
+    direction: GZ_TO_ROS
+
+  - ros_topic_name: "/camera/camera_info"
+    gz_topic_name: "/camera/camera_info"
+    ros_type_name: "sensor_msgs/msg/CameraInfo"
+    gz_type_name: "gz.msgs.CameraInfo"
+    direction: GZ_TO_ROS
+
+  - ros_topic_name: "/camera/image_raw"
+    gz_topic_name: "/camera/image_raw"
+    ros_type_name: "sensor_msgs/msg/Image"
+    gz_type_name: "gz.msgs.Image"
+    direction: GZ_TO_ROS
