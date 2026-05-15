@@ -30,7 +30,25 @@ URDF/Xacro → Robot Model → robot_state_publisher → ros2_control + Gazebo H
 10. Gripper trajectory controller
 11. Basic pick, close, lift, place, and release sequence
 ## Project Structure
-MoveIt2
+MoveIt2/
+├── assets/
+│   └── videos/
+│       └── pick_place_demo.mp4
+├── src/
+│   ├── my_robot_bringup/
+│   │   ├── config/
+│   │   ├── launch/
+│   │   └── worlds/
+│   ├── my_robot_commander_cpp/
+│   │   └── src/
+│   │       └── test_moveit.cpp
+│   ├── my_robot_description/
+│   │   ├── urdf/
+│   │   └── meshes/
+│   └── my_robot_moveit_config/
+│       └── config/
+├── README.md
+└── .gitignore
 
 ## Requirements
 This project was developed with:
@@ -45,13 +63,26 @@ This project was developed with:
 8. colcon build system
 
 Required ROS 2 packages include:
-1. sudo apt install ros-jazzy-moveit
-2. sudo apt install ros-jazzy-ros2-control
-3. sudo apt install ros-jazzy-ros2-controllers
-4. sudo apt install ros-jazzy-gz-ros2-control
-5. sudo apt install ros-jazzy-ros-gz
+sudo apt install ros-jazzy-moveit
+sudo apt install ros-jazzy-ros2-control
+sudo apt install ros-jazzy-ros2-controllers
+sudo apt install ros-jazzy-gz-ros2-control
+sudo apt install ros-jazzy-ros-gz
+
 ## Build Instructions
+git clone https://github.com/PrithviRaj037/MoveIt2.git
+cd MoveIt2
+Build the workspace:
+colcon build
+source install/setup.bash
+If you are already inside the workspace:
+cd ~/ros2_ws
+colcon build
+source install/setup.bash
 ## Run Instructions
+ros2 launch my_robot_bringup my_robot.launch.xml
+cd ~/ros2_ws
+source install/setup.bash
 ## Challenges Solved
 ## Future Work
 
