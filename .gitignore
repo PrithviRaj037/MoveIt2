@@ -1,22 +1,16 @@
-# ROS 2 specific
-install/
+# ROS generated TF/debug files
+frames_*.gv
+frames_*.pdf
+
+# ROS build files
 build/
+install/
 log/
-.ros/
 
-# Python
+# Python cache
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
+*.pyc
 
-# IDE
+# Editor files
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
-
-# OS
-.DS_Store
-Thumbs.db
